@@ -28,22 +28,24 @@ import com.feicuiedu.atm.userinfo.WriteUserInfo;
  */
 public class AdmainControl {
 	public void adminFlowControl() {
-		//管理员要操作userInfo.txt和 HashMap<String,User>集合，没有就创建，有了就读取出来用于操作
-		File file = new File("txt"+File.separator+"UserInfo.txt");
-		//检测文件是否存在以及创建
-		CreateSaveFile createSaveFile = new CreateSaveFile();
-		file = createSaveFile.createFile(file);
-		//检测文件中是否有HashMap<String,User>集合，有就读取，没有就创建
-		CreateHashMap createHashMap = new CreateHashMap();
-		HashMap<String,User> userInfoMap = createHashMap.createHp(file);
-		
-		//创建写入文件类的对象
-		WriteUserInfo writeUserInfo = new WriteUserInfo();
-		//创建读取文件类对象
-		ReadUserInfo readUserInfo = new ReadUserInfo();
+	
 		
 		aa:
 		do {
+			//管理员要操作userInfo.txt和 HashMap<String,User>集合，没有就创建，有了就读取出来用于操作
+			File file = new File("txt"+File.separator+"UserInfo.txt");
+			//检测文件是否存在以及创建
+			CreateSaveFile createSaveFile = new CreateSaveFile();
+			file = createSaveFile.createFile(file);
+			//检测文件中是否有HashMap<String,User>集合，有就读取，没有就创建
+			CreateHashMap createHashMap = new CreateHashMap();
+			HashMap<String,User> userInfoMap = createHashMap.createHp(file);
+			
+			//创建写入文件类的对象
+			WriteUserInfo writeUserInfo = new WriteUserInfo();
+			//创建读取文件类对象
+			ReadUserInfo readUserInfo = new ReadUserInfo();
+			
 			// 管理员业务主界面
 			AdminXmb adminXmb = new AdminXmb();
 			//显示完界面并返回用户输入的下一步

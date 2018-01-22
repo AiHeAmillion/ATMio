@@ -41,7 +41,7 @@ public class OpenAccount {
 				String temp1 = verifyAccount.idNoExist(userInfoMap, strIdNo);
 				if (temp1.equals("false")) {
 					//账号不存在存入user 跳出输入下面
-					user.setIdNo(sc.nextLine());
+					user.setIdNo(strIdNo);
 					break;
 				}else {
 					System.out.println("身份证号已经存在，重新输入！");
@@ -49,6 +49,7 @@ public class OpenAccount {
 				}
 			}
 		} while (true);
+		
 		System.out.println("联系地址(不得超过50位)：");
 		user.setAddress(sc.nextLine());
 		
@@ -71,6 +72,7 @@ public class OpenAccount {
 		//是否加个验证账号密码的正确性
 		
 		userInfoMap.put(number, user);
+		System.out.println("开户成功！");
 		return userInfoMap;
 	
 	}

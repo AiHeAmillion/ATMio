@@ -27,7 +27,7 @@ public class Login {
 			}else if(input == 2){
 				//用户登录
 				UserLogin userLogin = new UserLogin();
-				//userLogin.
+				userLogin.userLin();
 			}else{
 				System.out.println("输入错误，重新输入！");
 				continue aa;

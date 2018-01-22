@@ -10,7 +10,7 @@ import com.feicuiedu.atm.userinfo.User;
 public class Query {
 	public int userQuery(User user){   			// 显示用户信息 返回值为用户在此输入值 参数为user类的一个对象 
 		System.out.println("账户姓名:"+user.getName());
-		System.out.println("账户余额:"+user.getBalance());
+		System.out.println("账户余额:"+user.getBalance()+"元");
 		System.out.println("1.返回上一级");
 		//Date date = new Date();
 
@@ -21,7 +21,8 @@ public class Query {
 */
 		Scanner sc = new Scanner(System.in);
 		int input = Integer.valueOf(sc.nextLine());
-		if (input !=1 ) {	//判断输入的是不是 1
+		if (input !=1 ) {	
+			//判断输入的是不是 1
 			System.out.println("输入错误！重新输入");
 			userQuery(user);
 		}

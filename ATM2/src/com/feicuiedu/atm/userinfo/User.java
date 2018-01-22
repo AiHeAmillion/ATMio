@@ -11,6 +11,7 @@ public class User implements Serializable {
 	private String education;//学历
 	private double balance = 0; // 余额
 	private String address;	//联系地址
+	private StringBuffer flow = new StringBuffer(); //流水
 	
 	public String getAccount() {
 		return account;
@@ -60,7 +61,12 @@ public class User implements Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	} 
-	
+	public StringBuffer getFlow() {
+		return flow;
+	}
+	public void setFlow(StringBuffer flow) {
+		this.flow = flow;
+	}
 	
 }
 

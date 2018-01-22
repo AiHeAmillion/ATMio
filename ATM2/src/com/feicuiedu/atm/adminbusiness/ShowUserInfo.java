@@ -14,6 +14,7 @@ public class ShowUserInfo {
 		//键集遍历
 		for(String i :keys ) {
 			//通过键获取到值，值为user
+			System.out.println(i);
 			System.out.println("姓名："+userInfoMap.get(i).getName());
 			System.out.println("性别："+userInfoMap.get(i).getGender());
 			System.out.println("学历："+userInfoMap.get(i).getEducation());

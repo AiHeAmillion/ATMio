@@ -10,7 +10,11 @@ import com.feicuiedu.atm.adminbusiness.OpenAccount;
 import com.feicuiedu.atm.adminbusiness.ShowUserInfo;
 import com.feicuiedu.atm.ui.AdminXmb;
 import com.feicuiedu.atm.ui.UserXmb;
+import com.feicuiedu.atm.userbusiness.DealFlow;
+import com.feicuiedu.atm.userbusiness.DrawMoney;
 import com.feicuiedu.atm.userbusiness.Query;
+import com.feicuiedu.atm.userbusiness.SaveMoney;
+import com.feicuiedu.atm.userbusiness.TransferBussiness;
 import com.feicuiedu.atm.userinfo.CreateHashMap;
 import com.feicuiedu.atm.userinfo.CreateSaveFile;
 import com.feicuiedu.atm.userinfo.ReadUserInfo;
@@ -31,15 +35,6 @@ import com.feicuiedu.atm.userinfo.WriteUserInfo;
  */
 public class UserControl {
 	public void userFlowControl(String key) {
-/*		//用户需要从 HashMap<String,User>集合提取出自己的对象，没有就创建，有了就读取出来用于操作
-		File file = new File("txt"+File.separator+"UserInfo.txt");
-		//检测文件是否存在以及创建
-		CreateSaveFile createSaveFile = new CreateSaveFile();
-		file = createSaveFile.createFile(file);
-		//检测文件中是否有HashMap<String,User>集合，有就读取，没有就创建
-		CreateHashMap createHashMap = new CreateHashMap();
-		HashMap<String,User> userInfoMap = createHashMap.createHp(file); */
-		
 		
 		aa:
 		do {
@@ -60,28 +55,38 @@ public class UserControl {
 				//查询
 				Query query = new Query();
 				query.userQuery(userInfoMap.get(key));
+				//对数据无操作 不需要写入文件
 				continue aa;//返回管理员界面
 			}else if (input == 2) {
-				//销户
-				CloseAccount closeAccount = new CloseAccount();
-				closeAccount.AccountCancellation(userInfoMap);
+				//转账
+				TransferBussiness transferBussiness = new TransferBussiness();
+				//转账这里的方法直接操作的集合 的键与值 所以不需要创建一个新的集合接受与其他业务不同
+				transferBussiness.userTransfer(userInfoMap, key);
 				//写入文件
 				writeUserInfo.write(userInfoMap, file);
 				continue aa;//返回管理员界面
 			}else if (input == 3) {
-				//显示信息
-				ShowUserInfo showUserInfo = new ShowUserInfo();
-				showUserInfo.show(userInfoMap);
-				//对数据无操作不需要 写入
+				//存款
+				SaveMoney saveMoney = new SaveMoney();
+				userInfoMap = saveMoney.userSave(userInfoMap,key);
+				//写入文件
+				writeUserInfo.write(userInfoMap, file);
 				continue aa;//返回管理员界面
 			}else if (input == 4) {
-				//修改信息
-				ChangeAccount changeAccount = new ChangeAccount();
-				changeAccount.change(userInfoMap);
+				//取款
+				DrawMoney drawMoney = new DrawMoney();
+				userInfoMap = drawMoney.userDraw(userInfoMap, key);
 				//写入文件
 				writeUserInfo.write(userInfoMap, file);
 				continue aa;//返回管理员界面
 			}else if (input == 5) {
+				//流水
+				DealFlow dealFlow =new DealFlow();
+				dealFlow.userFlow(userInfoMap.get(key));
+				//流水只是查看 并不操作 不需要写入  可以做个删除流水
+				//返回管理员界面
+				continue aa;
+			}else if (input == 6) {
 				//退出
 				Login login = new Login();
 				login.lin();
